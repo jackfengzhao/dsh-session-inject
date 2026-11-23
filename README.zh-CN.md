@@ -263,6 +263,7 @@ npm run test:progress       # SSE 进度通知
 | 文档 | 内容 |
 |---|---|
 | [`docs/INSTALL.zh-CN.md`](docs/INSTALL.zh-CN.md) | 换机部署（Windows + Linux）、验收清单、排错 |
+| [`docs/agent-usage.md`](docs/agent-usage.md) | 给 agent / MCP 客户端看的用法：调用序列、phase 语义、错误处理 |
 | [`docs/api-evidence.md`](docs/api-evidence.md) | 插件所依赖的 dsh 源码摘录 |
 | [`docs/REPORT.md`](docs/REPORT.md) | 交付报告：API 调研、验收结果、各版本变更 |
 | [`CHANGELOG.md`](CHANGELOG.md) | 版本记录 |

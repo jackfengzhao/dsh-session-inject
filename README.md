@@ -285,6 +285,7 @@ The plugin itself has **no runtime dependencies**.
 | Doc | Content |
 |---|---|
 | [`docs/INSTALL.md`](docs/INSTALL.md) | install on another machine (Windows and Linux), verification checklist, troubleshooting |
+| [`docs/agent-usage.md`](docs/agent-usage.md) | how an agent or MCP client should drive the endpoint: recipes, phases, error handling |
 | [`docs/api-evidence.md`](docs/api-evidence.md) | the dsh source excerpts this plugin builds on |
 | [`docs/REPORT.md`](docs/REPORT.md) | delivery report: API investigation, acceptance results, per-version changes |
 | [`CHANGELOG.md`](CHANGELOG.md) | release notes |
