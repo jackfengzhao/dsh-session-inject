@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# local test scratch
+test-workspace/
+
+# runtime / logs
+*.log
+.workspace-control.log
+*.bak-*
+submissions.jsonl
+
+# build / packs
+*.tgz
+dist/
+out/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

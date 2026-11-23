@@ -1,0 +1,28 @@
+# dsh-session-inject - DSH bundle profile patch.
+#
+# Registers the plugin as a loader row. The plugin itself starts its own
+# loopback MCP server (default 127.0.0.1:3090) and needs no other row.
+#
+# Optional config keys (defaults shown):
+#   port: 3090
+#   host: '127.0.0.1'
+#   token: ''                 # or DSH_SESSION_INJECT_TOKEN
+#   maxWaitMs: 240000         # wait_ms cap; capped waits return status=running
+#   stallMs: 120000           # idle_ms above this -> phase="stalled"
+#   progressIntervalMs: 8000  # SSE notifications/progress cadence
+#   persistPath: <DSH_HOME>/dsh-session-inject/submissions.jsonl
+#   persistTtlHours: 24
+#   maxTurnMs: 600000
+#   allowCreate: true
+#   legacyScan: false
+#
+# Install with:
+#   dsh plugin --profile <profile> add ./dsh-session-inject
+# or through the plugin_manager tool (install_bundle), or copy the directory
+# into <profile>/node_modules and add the entry below.
+- insert:
+    - id: dsh-session-inject
+      name: 'dsh-session-inject'
+      config:
+        port: 3090
+        host: '127.0.0.1'

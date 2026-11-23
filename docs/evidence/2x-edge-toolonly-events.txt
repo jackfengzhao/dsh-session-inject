@@ -1,0 +1,73 @@
+{
+  "file": "C:\\Users\\<user>\\.dsh\\sessions\\--C-Users-<user>-Documents-code-dsh-session-inject-test-workspace--\\session-f5724369-ea9c-45f9-ba82-513ab0ac9b08\\session.v4.jsonl.zstd",
+  "bytes": 46465,
+  "events": 63,
+  "counts": {
+    "session": 1,
+    "permission/preset": 1,
+    "sandbox/mode": 1,
+    "approval/policy": 1,
+    "model/selection": 1,
+    "agent/inbox/spliced": 6,
+    "turn/start": 2,
+    "step/start": 6,
+    "system/message": 1,
+    "user/message": 8,
+    "request/header": 1,
+    "request/context": 1,
+    "session/title": 2,
+    "session/title-llm-request": 1,
+    "assistant/message": 6,
+    "tool/call": 4,
+    "job/registered": 4,
+    "job/settled": 4,
+    "tool/result": 4,
+    "step/end": 6,
+    "turn/end": 2
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "start": 5,
+      "end": 44
+    },
+    {
+      "turn": 2,
+      "start": 46,
+      "end": 61
+    }
+  ],
+  "lastSeq": 61
+}
+
+[turn/start] seq=5 data={"turn":1}
+
+[user/message] seq=9 source={"kind":"user","rpcId":"dsh-session-inject-fc5174a5-f981-4b57-afbd-aad5924d6a09","clientTimeZone":"Asia/Shanghai"}
+  text: "请只调用 pwsh 工具执行 echo TOOLONLY，然后立即结束回合；不要输出任何文字、不要解释。"
+
+[assistant/message] seq=18 turn=1
+  text: ""
+
+[assistant/message] seq=25 turn=1
+  text: ""
+
+[assistant/message] seq=32 turn=1
+  text: ""
+
+[assistant/message] seq=42 turn=1
+  text: ""
+
+[turn/end] seq=44 data={"turn":1,"reason":{"kind":"completed"}}
+
+[turn/start] seq=46 data={"turn":2}
+
+[user/message] seq=49 source={"kind":"user","rpcId":"dsh-session-inject-59b1a8c9-757a-424c-9308-c323a9695b4b","clientTimeZone":"Asia/Shanghai"}
+  text: "请只调用 pwsh 工具执行 echo TOOLONLY2，然后立即结束回合；不要输出任何文字、不要解释。"
+
+[assistant/message] seq=51 turn=2
+  text: ""
+
+[assistant/message] seq=59 turn=2
+  text: "TOOLONLY2"
+
+[turn/end] seq=61 data={"turn":2,"reason":{"kind":"completed"}}

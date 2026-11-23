@@ -1,0 +1,46 @@
+{
+  "captured_at": "2026-11-23T10:09:02.338Z",
+  "sessions": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "[\n  {\n    \"session_id\": \"session-3b7b923d-6745-481a-8145-9b0b7f699534\",\n    \"title\": \"<redacted-title>\": true\n  }\n]"
+        }
+      ],
+      "metadata": [
+        {
+          "session_id": "session-3b7b923d-6745-481a-8145-9b0b7f699534",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "session-c8bc66df-676d-42ef-b998-41cf96107c72",
+          "title": "<redacted-title>",
+          "model": "deepseek-official/deepseek-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "hermes-<redacted-id>",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Documents\\code\\dsh-session-inject\\test-workspace",
+          "busy": true
+        }
+      ],
+      "isError": false
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "captured_at": "2026-11-23T12:53:11.520Z",
+  "session_id": "session-6e4aa27f-6e65-4dd1-8adc-6fe02a95d0b8",
+  "curl_exit": "28",
+  "recovered_from_list": {
+    "submission_id": "sub-mwt9n4cx-hniktu6y",
+    "session_id": "session-6e4aa27f-6e65-4dd1-8adc-6fe02a95d0b8",
+    "status": "running",
+    "phase": "running",
+    "delivery": "queue",
+    "created_at": "2026-11-23T12:52:39.249Z",
+    "started_at": "2026-11-23T12:52:39.250Z",
+    "elapsed_ms": 5168,
+    "steps_seen": 1,
+    "last_event_type": "session/title",
+    "last_activity_at": "2026-11-23T12:52:43.330Z",
+    "idle_ms": 1088,
+    "reply_preview": "",
+    "wait_capped": true
+  },
+  "timeline": [
+    {
+      "at_ms": 2,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 1093,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 3015,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 4106,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 6030,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 7121,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 9037,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 10128,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 12048,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 13139,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 15060,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 16151,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 18073,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 19164,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 21084,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 22174,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 24092,
+      "status": "running",
+      "phase": "running",
+      "idle_ms": 25183,
+      "steps_seen": 1
+    },
+    {
+      "at_ms": 27098,
+      "status": "done",
+      "phase": "done",
+      "idle_ms": 1192,
+      "steps_seen": 2
+    }
+  ],
+  "final_status": {
+    "submission_id": "sub-mwt9n4cx-hniktu6y",
+    "session_id": "session-6e4aa27f-6e65-4dd1-8adc-6fe02a95d0b8",
+    "status": "done",
+    "phase": "done",
+    "delivery": "queue",
+    "created_at": "2026-11-23T12:52:39.249Z",
+    "started_at": "2026-11-23T12:52:39.250Z",
+    "elapsed_ms": 31223,
+    "steps_seen": 2,
+    "last_event_type": "step/end",
+    "last_activity_at": "2026-11-23T12:53:10.327Z",
+    "idle_ms": 1192,
+    "reply_preview": "B-DONE",
+    "wait_capped": true,
+    "queue_position": null,
+    "reply_text": "B-DONE",
+    "turn_end_seq": 27,
+    "turn_end_reason": {
+      "kind": "completed"
+    },
+    "assistant_texts": [
+      "",
+      "B-DONE"
+    ]
+  },
+  "checks": {
+    "list_found_running": true,
+    "reached_done": true,
+    "reply_correct": true
+  }
+}

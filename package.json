@@ -1,0 +1,64 @@
+{
+  "name": "dsh-session-inject",
+  "version": "0.3.0",
+  "description": "DeepSeek Harness (dsh) plugin: a loopback MCP endpoint that injects a prompt into one specific live dsh session and returns that turn's final reply - the session runs the turn itself, no subagent is spawned.",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs",
+    "lib",
+    "cordis.patch.yml",
+    "install.ps1",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "examples"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "cordis",
+    "hermes",
+    "deepseek-harness",
+    "session-inject",
+    "dsh-plugin",
+    "mcp"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackfengzhao/dsh-session-inject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jackfengzhao/dsh-session-inject/issues"
+  },
+  "homepage": "https://github.com/jackfengzhao/dsh-session-inject#readme",
+  "author": "jackfengzhao",
+  "scripts": {
+    "start": "node index.mjs",
+    "test:smoke": "node tools/smoke.mjs",
+    "test:mcp": "node tools/mcp-client-check.mjs",
+    "test:wait": "node tools/test-wait-cap.mjs",
+    "test:recover": "node tools/test-recover.mjs",
+    "test:stall": "node tools/test-stall.mjs",
+    "test:progress": "node tools/test-progress.mjs",
+    "test:concurrent": "node tools/test-concurrent.mjs",
+    "test:ttl": "node tools/test-ttl.mjs"
+  }
+}

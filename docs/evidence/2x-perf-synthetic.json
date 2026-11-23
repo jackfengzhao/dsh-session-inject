@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-11-23T11:29:40.093Z",
+  "note": "Synthetic micro-benchmark of snapshotEvents() + filter (v0.1) vs snapshotEvents(cursor) (v0.2). Real 20-turn measurement: docs/evidence/2x-perf-legacy.json and 2x-perf-incremental.json.",
+  "results": [
+    {
+      "events": 10000,
+      "iterations": 200,
+      "legacy_full_scan": {
+        "total_ms": 10.389,
+        "per_scan_ms": 0.0519
+      },
+      "incremental_tail_scan": {
+        "total_ms": 0.022,
+        "per_scan_ms": 0.0001
+      },
+      "speedup": 478.74
+    },
+    {
+      "events": 100000,
+      "iterations": 50,
+      "legacy_full_scan": {
+        "total_ms": 30.323,
+        "per_scan_ms": 0.6065
+      },
+      "incremental_tail_scan": {
+        "total_ms": 0.059,
+        "per_scan_ms": 0.0012
+      },
+      "speedup": 512.21
+    },
+    {
+      "events": 1000000,
+      "iterations": 10,
+      "legacy_full_scan": {
+        "total_ms": 58.601,
+        "per_scan_ms": 5.8601
+      },
+      "incremental_tail_scan": {
+        "total_ms": 0.002,
+        "per_scan_ms": 0.0002
+      },
+      "speedup": 23440.2
+    }
+  ]
+}

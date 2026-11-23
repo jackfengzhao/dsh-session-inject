@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-11-23T12:58:23.320Z",
+  "file": "C:\\Users\\<user>\\AppData\\Local\\Temp\\dsh-si-ttl-fNEiOG\\submissions.jsonl",
+  "input_lines": 3,
+  "persisted_after_load": [
+    "fresh-1"
+  ],
+  "remaining_lines": 1,
+  "remaining_rows": [
+    {
+      "submission_id": "fresh-1",
+      "session_id": "s2",
+      "status": "done",
+      "created_at": 1795438643319,
+      "updated_at": 1795438693319,
+      "last_activity_at": 1795438693319,
+      "reply_preview": "TTL-OK"
+    }
+  ],
+  "checks": {
+    "old_dropped": true,
+    "fresh_kept": true,
+    "latest_wins": true,
+    "file_compacted": true,
+    "orphaned_flag": true
+  }
+}

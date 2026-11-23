@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-11-23T10:09:03.813Z",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 5,
+    "error": {
+      "code": -32030,
+      "message": "unknown session_id: session_id \"session-does-not-exist-0000\" is not a known DSH session (live sessions: session-3b7b923d-6745-481a-8145-9b0b7f699534, session-c8bc66df-676d-42ef-b998-41cf96107c72, hermes-<redacted-id>, session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344)",
+      "data": {
+        "error_code": "E_UNKNOWN_SESSION",
+        "hint": "call sessions_list and use one of the live session ids",
+        "session_id": "session-does-not-exist-0000",
+        "live_sessions": [
+          "session-3b7b923d-6745-481a-8145-9b0b7f699534",
+          "session-c8bc66df-676d-42ef-b998-41cf96107c72",
+          "hermes-<redacted-id>",
+          "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344"
+        ],
+        "cause": "session \"session-does-not-exist-0000\" not found"
+      }
+    }
+  }
+}

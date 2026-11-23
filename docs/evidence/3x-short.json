@@ -1,0 +1,66 @@
+{
+  "captured_at": "2026-11-23T12:56:47.162Z",
+  "session_id": "session-60b7183f-3a2a-4d9d-a90f-c03472a0132a",
+  "wall_ms": 1571,
+  "inject": {
+    "ok": true,
+    "session_id": "session-60b7183f-3a2a-4d9d-a90f-c03472a0132a",
+    "submission_id": "sub-mwt9seg2-yev1zdkd",
+    "status": "done",
+    "phase": "done",
+    "wait_capped": false,
+    "requested_ms": 3000,
+    "effective_ms": 3000,
+    "elapsed_ms": 1545,
+    "steps_seen": 1,
+    "last_event_type": "turn/end",
+    "last_activity_at": "2026-11-23T12:56:46.978Z",
+    "idle_ms": 170,
+    "reply_text": "SHORT-OK",
+    "turn_end_seq": 29,
+    "turn_end_reason": {
+      "kind": "completed"
+    },
+    "assistant_texts": [
+      "SHORT-OK"
+    ]
+  },
+  "status": {
+    "submission_id": "sub-mwt9seg2-yev1zdkd",
+    "session_id": "session-60b7183f-3a2a-4d9d-a90f-c03472a0132a",
+    "status": "done",
+    "phase": "done",
+    "delivery": "queue",
+    "created_at": "2026-11-23T12:56:45.602Z",
+    "started_at": "2026-11-23T12:56:45.603Z",
+    "elapsed_ms": 1430,
+    "steps_seen": 1,
+    "last_event_type": "turn/end",
+    "last_activity_at": "2026-11-23T12:56:46.978Z",
+    "idle_ms": 176,
+    "reply_preview": "SHORT-OK",
+    "wait_capped": false,
+    "queue_position": null,
+    "reply_text": "SHORT-OK",
+    "turn_end_seq": 29,
+    "turn_end_reason": {
+      "kind": "completed"
+    },
+    "assistant_texts": [
+      "SHORT-OK"
+    ]
+  },
+  "sessions_count": 7,
+  "created": {
+    "ok": true,
+    "session_id": "session-f9ed3df0-e73c-4898-bd8f-2f7d0114d69f"
+  },
+  "checks": {
+    "done_within_3s": true,
+    "reply_correct": true,
+    "no_wait_capped": true,
+    "status_phase_done": true,
+    "sessions_list_ok": true,
+    "session_create_ok": true
+  }
+}

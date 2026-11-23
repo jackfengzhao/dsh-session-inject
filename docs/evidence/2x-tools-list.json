@@ -1,0 +1,110 @@
+{
+  "captured_at": "2026-11-23T11:29:48.200Z",
+  "tools": [
+    "sessions_list",
+    "session_inject",
+    "inject_status",
+    "session_create"
+  ],
+  "raw": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+      "tools": [
+        {
+          "name": "sessions_list",
+          "description": "List the live DSH sessions: session_id, title, model, cwd, busy.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "session_inject",
+          "description": "Deliver a user turn INTO one live DSH session (the session itself executes it: its own model, tools and context - no subagent). Returns the submission id and, when wait_ms > 0, the final reply text of that turn.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "session_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "description": "Target session id; omitted = first live session."
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32000,
+                "description": "Task text delivered as the user turn."
+              },
+              "delivery": {
+                "type": "string",
+                "enum": [
+                  "queue",
+                  "steer"
+                ],
+                "default": "queue"
+              },
+              "wait_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 600000,
+                "default": 0,
+                "description": "Max time to wait for the reply; 0 returns immediately."
+              }
+            },
+            "required": [
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "inject_status",
+          "description": "Read one submission: status (queued|running|done|failed), reply_text when done, error when failed.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "submission_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "submission_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "session_create",
+          "description": "Create a new blank DSH session and return its id. Optional cwd/agentPreset and provider/model (model is pinned with sessionController.selectModel).",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "cwd": {
+                "type": "string",
+                "description": "Working directory for the new session."
+              },
+              "agentPreset": {
+                "type": "string",
+                "description": "Agent preset id (default: profile default)."
+              },
+              "provider": {
+                "type": "string",
+                "description": "LLM provider id to pin."
+              },
+              "model": {
+                "type": "string",
+                "description": "Model id to pin (requires provider)."
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
+    }
+  }
+}

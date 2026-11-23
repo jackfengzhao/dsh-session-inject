@@ -1,0 +1,70 @@
+{
+  "captured_at": "2026-11-23T10:09:07.014Z",
+  "elapsed_ms": 3201,
+  "a": {
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"session_id\": \"session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344\",\n  \"submission_id\": \"sub-mwt3sqpy-aenj8u73\",\n  \"status\": \"done\",\n  \"reply_text\": \"CONC-A\",\n  \"turn_end_seq\": 119,\n  \"elapsed_ms\": 1331\n}"
+          }
+        ],
+        "metadata": {
+          "ok": true,
+          "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+          "submission_id": "sub-mwt3sqpy-aenj8u73",
+          "status": "done",
+          "reply_text": "CONC-A",
+          "turn_end_seq": 119,
+          "elapsed_ms": 1331
+        },
+        "isError": false
+      }
+    },
+    "parsed": {
+      "ok": true,
+      "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+      "submission_id": "sub-mwt3sqpy-aenj8u73",
+      "status": "done",
+      "reply_text": "CONC-A",
+      "turn_end_seq": 119,
+      "elapsed_ms": 1331
+    }
+  },
+  "b": {
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"session_id\": \"session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344\",\n  \"submission_id\": \"sub-mwt3sqqc-x3kjvdms\",\n  \"status\": \"done\",\n  \"reply_text\": \"CONC-B\",\n  \"turn_end_seq\": 128,\n  \"elapsed_ms\": 3186\n}"
+          }
+        ],
+        "metadata": {
+          "ok": true,
+          "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+          "submission_id": "sub-mwt3sqqc-x3kjvdms",
+          "status": "done",
+          "reply_text": "CONC-B",
+          "turn_end_seq": 128,
+          "elapsed_ms": 3186
+        },
+        "isError": false
+      }
+    },
+    "parsed": {
+      "ok": true,
+      "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+      "submission_id": "sub-mwt3sqqc-x3kjvdms",
+      "status": "done",
+      "reply_text": "CONC-B",
+      "turn_end_seq": 128,
+      "elapsed_ms": 3186
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "captured_at": "2026-11-23T10:09:03.810Z",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 4,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"submission_id\": \"sub-mwt3splr-pjfm2y0j\",\n  \"session_id\": \"session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344\",\n  \"status\": \"done\",\n  \"reply_text\": \"EVID-MWT3SPLQ\",\n  \"turn_end_seq\": 110,\n  \"elapsed_ms\": 1441\n}"
+        }
+      ],
+      "metadata": {
+        "submission_id": "sub-mwt3splr-pjfm2y0j",
+        "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+        "status": "done",
+        "reply_text": "EVID-MWT3SPLQ",
+        "turn_end_seq": 110,
+        "elapsed_ms": 1441
+      },
+      "isError": false
+    }
+  },
+  "parsed": {
+    "submission_id": "sub-mwt3splr-pjfm2y0j",
+    "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+    "status": "done",
+    "reply_text": "EVID-MWT3SPLQ",
+    "turn_end_seq": 110,
+    "elapsed_ms": 1441
+  }
+}

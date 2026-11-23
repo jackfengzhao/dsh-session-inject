@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-11-23T11:29:48.239Z",
+  "tool": "session_create",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"ok\": true,\n  \"session_id\": \"session-fd7a95e8-3bf3-4ad1-a263-517b298856fe\"\n}"
+        }
+      ],
+      "metadata": {
+        "ok": true,
+        "session_id": "session-fd7a95e8-3bf3-4ad1-a263-517b298856fe"
+      },
+      "isError": false
+    }
+  },
+  "parsed": {
+    "ok": true,
+    "session_id": "session-fd7a95e8-3bf3-4ad1-a263-517b298856fe"
+  }
+}

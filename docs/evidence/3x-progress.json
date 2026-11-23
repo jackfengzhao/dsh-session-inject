@@ -1,0 +1,53 @@
+{
+  "captured_at": "2026-11-23T13:06:59.796Z",
+  "session_id": "session-3d76f12e-02de-4584-9838-71460bdbd7d9",
+  "sdk": "1.32.2",
+  "wall_ms": 10716,
+  "progress_count": 2,
+  "progress": [
+    {
+      "at_ms": 48,
+      "progress": 1,
+      "total": 100,
+      "message": "{\"phase\":\"queued\",\"elapsed_ms\":0,\"steps_seen\":0,\"last_event_type\":null,\"status\":\"queued\",\"submission_id\":\"sub-mwta5c46-75d0dk2j\"}"
+    },
+    {
+      "at_ms": 8123,
+      "progress": 2,
+      "total": 100,
+      "message": "{\"phase\":\"running\",\"elapsed_ms\":8092,\"steps_seen\":1,\"last_event_type\":\"session-log-deepseek/delivery-accepted\",\"status\":\"running\",\"submission_id\":\"sub-mwta5c46-75d0dk2j\"}"
+    }
+  ],
+  "result": {
+    "isError": false,
+    "payload": {
+      "ok": true,
+      "session_id": "session-3d76f12e-02de-4584-9838-71460bdbd7d9",
+      "submission_id": "sub-mwta5c46-75d0dk2j",
+      "status": "done",
+      "phase": "done",
+      "wait_capped": false,
+      "requested_ms": 120000,
+      "effective_ms": 120000,
+      "elapsed_ms": 10683,
+      "steps_seen": 1,
+      "last_event_type": "turn/end",
+      "last_activity_at": "2026-11-23T13:06:59.589Z",
+      "idle_ms": 205,
+      "reply_text": "## MCP 进度通知的设计\n\nMCP（Model Context Protocol）把工具调用抽象成一次请求—响应，但真实任务往往要跑几十秒甚至更久。客户端在等一个 result，用户却需要知道“它还在动吗”。进度通知就是为这段等待补上的反馈。\n\n机制本身很小。客户端发起 tools/call 时，在 _meta 里放一个 progressToken；服务端执行过程中发出 notifications/progress，原样带回这个 token，并附上 progress、可选的 total 与 message。token 由客户端生成，服务端只负责回显，不能自己发明——它的唯一作用，是把这条通知关联回某个具体请求。\n\n第一个设计取舍是用数值而不是百分比。progress 与 total 都是数字，除法交给客户端。好处是服务端不必知道总量：扫描目录时文件数会变，下载时大小未知，只有已完成量是确定的。total 缺席时，客户端显示不确定进度条，而不是伪造一个 0%–100% 的假象。\n\n第二个取舍是单调与节流。progress 应当单调不减，允许跳跃，不应回退；回退会让进度条反复抽动，也让“是否卡住”的判断失效。同时通知不能太密：每处理一个字节发一条，会淹没 SSE 通道、拖慢渲染。实践上按时间或按增量阈值节流，例如每八秒一条或每完成百分之一发一条，比“尽可能实时”更好用。\n\n第三个取舍是它的性质：单向、尽力而为。进度通知不是控制面——不能传指令，不能代替错误，不能充当响应。服务端发完 100% 的 progress 之后，仍必须返回真正的 result 或 error；客户端收不到通知，也不该影响最终结果的正确性。反过来，取消走 notifications/cancelled，是另一条独立通道。把两者混在一起，是很多实现埋下的隐患。\n\nmessage 字段容易被滥用。它是给人看的一行字，比如“正在解析第 3 个文件”，不应承载机器要解析的语义，也不该把本地路径、令牌之类的敏感信息塞进去。机器需要的信息应走结构化字段，而不是让客户端拿正则去啃一句自然语言。\n\n传输层还有现实问题。在 SSE 流式响应里，通知和最终响应共用一条流，需要正确分帧；通知可能乱序或重复，消费者应基于 progress 值比较而非计数。服务端也必须处理客户端没带 token 的情况——此时安静地不发通知，而不是报错。\n\n归根到底，进度通知是给用户的可观测性，不是协议的强约束。好的实现让它在缺失时系统照样正确，在存在时让人安心，也就够了。",
+      "turn_end_seq": 57,
+      "turn_end_reason": {
+        "kind": "completed"
+      },
+      "assistant_texts": [
+        "## MCP 进度通知的设计\n\nMCP（Model Context Protocol）把工具调用抽象成一次请求—响应，但真实任务往往要跑几十秒甚至更久。客户端在等一个 result，用户却需要知道“它还在动吗”。进度通知就是为这段等待补上的反馈。\n\n机制本身很小。客户端发起 tools/call 时，在 _meta 里放一个 progressToken；服务端执行过程中发出 notifications/progress，原样带回这个 token，并附上 progress、可选的 total 与 message。token 由客户端生成，服务端只负责回显，不能自己发明——它的唯一作用，是把这条通知关联回某个具体请求。\n\n第一个设计取舍是用数值而不是百分比。progress 与 total 都是数字，除法交给客户端。好处是服务端不必知道总量：扫描目录时文件数会变，下载时大小未知，只有已完成量是确定的。total 缺席时，客户端显示不确定进度条，而不是伪造一个 0%–100% 的假象。\n\n第二个取舍是单调与节流。progress 应当单调不减，允许跳跃，不应回退；回退会让进度条反复抽动，也让“是否卡住”的判断失效。同时通知不能太密：每处理一个字节发一条，会淹没 SSE 通道、拖慢渲染。实践上按时间或按增量阈值节流，例如每八秒一条或每完成百分之一发一条，比“尽可能实时”更好用。\n\n第三个取舍是它的性质：单向、尽力而为。进度通知不是控制面——不能传指令，不能代替错误，不能充当响应。服务端发完 100% 的 progress 之后，仍必须返回真正的 result 或 error；客户端收不到通知，也不该影响最终结果的正确性。反过来，取消走 notifications/cancelled，是另一条独立通道。把两者混在一起，是很多实现埋下的隐患。\n\nmessage 字段容易被滥用。它是给人看的一行字，比如“正在解析第 3 个文件”，不应承载机器要解析的语义，也不该把本地路径、令牌之类的敏感信息塞进去。机器需要的信息应走结构化字段，而不是让客户端拿正则去啃一句自然语言。\n\n传输层还有现实问题。在 SSE 流式响应里，通知和最终响应共用一条流，需要正确分帧；通知可能乱序或重复，消费者应基于 progress 值比较而非计数。服务端也必须处理客户端没带 token 的情况——此时安静地不发通知，而不是报错。\n\n归根到底，进度通知是给用户的可观测性，不是协议的强约束。好的实现让它在缺失时系统照样正确，在存在时让人安心，也就够了。"
+      ]
+    }
+  },
+  "error": null,
+  "checks": {
+    "received_two_or_more": true,
+    "call_succeeded": true,
+    "reply_present": true
+  }
+}

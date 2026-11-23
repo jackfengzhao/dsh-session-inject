@@ -1,0 +1,10 @@
+       version=0.2.0 auth=open live=7
+[PASS] health endpoint reachable
+[PASS] MCP initialize
+[PASS] tools/list has 4 tools
+       sessions=7 busy=1
+[PASS] sessions_list returns live sessions
+       session=session-6a47ddc5-bfa8-4fca-ba23-758aacb5aa4b reply=DESKTOP-OK
+[PASS] session_create + session_inject + inject_status round trip
+
+RESULT: PASS (desktop profile verified)

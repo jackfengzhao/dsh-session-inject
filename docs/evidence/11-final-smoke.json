@@ -1,0 +1,89 @@
+{
+  "started_at": "2026-11-23T10:09:12.484Z",
+  "finished_at": "2026-11-23T10:09:15.742Z",
+  "passed": true,
+  "report": {
+    "checks": {
+      "tools_list": true,
+      "sessions_list": true,
+      "unknown_session": true,
+      "inject_done": true,
+      "inject_status": true
+    },
+    "details": {
+      "tools": [
+        "sessions_list",
+        "session_inject",
+        "inject_status"
+      ],
+      "sessions": [
+        {
+          "session_id": "session-3b7b923d-6745-481a-8145-9b0b7f699534",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "session-c8bc66df-676d-42ef-b998-41cf96107c72",
+          "title": "<redacted-title>",
+          "model": "deepseek-official/deepseek-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "hermes-<redacted-id>",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Hermes",
+          "busy": true
+        },
+        {
+          "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+          "title": "<redacted-title>",
+          "model": "<provider>/mimo-v2.6-flash",
+          "cwd": "C:\\Users\\<user>\\Documents\\code\\dsh-session-inject\\test-workspace",
+          "busy": true
+        }
+      ],
+      "target": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+      "unknown_session": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "error": {
+          "code": -32030,
+          "message": "unknown session_id: session_id \"session-does-not-exist-0000\" is not a known DSH session (live sessions: session-3b7b923d-6745-481a-8145-9b0b7f699534, session-c8bc66df-676d-42ef-b998-41cf96107c72, hermes-<redacted-id>, session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344)",
+          "data": {
+            "error_code": "E_UNKNOWN_SESSION",
+            "hint": "call sessions_list and use one of the live session ids",
+            "session_id": "session-does-not-exist-0000",
+            "live_sessions": [
+              "session-3b7b923d-6745-481a-8145-9b0b7f699534",
+              "session-c8bc66df-676d-42ef-b998-41cf96107c72",
+              "hermes-<redacted-id>",
+              "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344"
+            ],
+            "cause": "session \"session-does-not-exist-0000\" not found"
+          }
+        }
+      },
+      "inject": {
+        "ok": true,
+        "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+        "submission_id": "sub-mwt3sxfo-b6pxk2a3",
+        "status": "done",
+        "reply_text": "SMOKE-OK",
+        "turn_end_seq": 146,
+        "elapsed_ms": 3223
+      },
+      "inject_status": {
+        "submission_id": "sub-mwt3sxfo-b6pxk2a3",
+        "session_id": "session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344",
+        "status": "done",
+        "reply_text": "SMOKE-OK",
+        "turn_end_seq": 146,
+        "elapsed_ms": 3175
+      }
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "file": "C:\\Users\\<user>\\.dsh\\sessions\\--C-Users-<user>-Documents-code-dsh-session-inject-test-workspace--\\session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344\\session.v4.jsonl.zstd",
+  "bytes": 83149,
+  "events": 148,
+  "counts": {
+    "session": 1,
+    "permission/preset": 1,
+    "sandbox/mode": 1,
+    "approval/policy": 1,
+    "model/selection": 1,
+    "agent/inbox/spliced": 30,
+    "turn/start": 15,
+    "step/start": 15,
+    "system/message": 1,
+    "user/message": 32,
+    "request/header": 1,
+    "request/context": 1,
+    "session/title": 2,
+    "session/title-llm-request": 1,
+    "assistant/message": 15,
+    "step/end": 15,
+    "turn/end": 15
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "start": 5,
+      "end": 20
+    },
+    {
+      "turn": 2,
+      "start": 22,
+      "end": 29
+    },
+    {
+      "turn": 3,
+      "start": 31,
+      "end": 38
+    },
+    {
+      "turn": 4,
+      "start": 40,
+      "end": 47
+    },
+    {
+      "turn": 5,
+      "start": 49,
+      "end": 56
+    },
+    {
+      "turn": 6,
+      "start": 58,
+      "end": 65
+    },
+    {
+      "turn": 7,
+      "start": 67,
+      "end": 74
+    },
+    {
+      "turn": 8,
+      "start": 76,
+      "end": 83
+    },
+    {
+      "turn": 9,
+      "start": 85,
+      "end": 92
+    },
+    {
+      "turn": 10,
+      "start": 94,
+      "end": 101
+    },
+    {
+      "turn": 11,
+      "start": 103,
+      "end": 110
+    },
+    {
+      "turn": 12,
+      "start": 112,
+      "end": 119
+    },
+    {
+      "turn": 13,
+      "start": 121,
+      "end": 128
+    },
+    {
+      "turn": 14,
+      "start": 130,
+      "end": 137
+    },
+    {
+      "turn": 15,
+      "start": 139,
+      "end": 146
+    }
+  ],
+  "lastSeq": 146
+}
+
+[turn/start] seq=5 data={"turn":1}
+
+[user/message] seq=9 source={"kind":"user","rpcId":"dsh-session-inject-f13ffd70-3f63-40da-8a38-819a3f96ffcf","clientTimeZone":"Asia/Shanghai"}
+  text: "???? INJECT-OK"
+
+[assistant/message] seq=18 turn=1
+  text: "INJECT-OK — 收到。这看起来是一条注入/连通性测试消息，没有具体任务。会话已就绪，等待你的下一步指令。"
+
+[turn/end] seq=20 data={"turn":1,"reason":{"kind":"completed"}}
+
+[turn/start] seq=22 data={"turn":2}
+
+[user/message] seq=25 source={"kind":"user","rpcId":"dsh-session-inject-34fc6a76-8cae-492c-9b58-86b86c8aff55","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-A，不要解释。"
+
+[assistant/message] seq=27 turn=2
+  text: "CONC-A"
+
+[turn/end] seq=29 data={"turn":2,"reason":{"kind":"completed"}}
+
+[turn/start] seq=31 data={"turn":3}
+
+[user/message] seq=34 source={"kind":"user","rpcId":"dsh-session-inject-28502faa-c062-417d-b319-5f255e80d2bb","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-B，不要解释。"
+
+[assistant/message] seq=36 turn=3
+  text: "CONC-B"
+
+[turn/end] seq=38 data={"turn":3,"reason":{"kind":"completed"}}
+
+[turn/start] seq=40 data={"turn":4}
+
+[user/message] seq=43 source={"kind":"user","rpcId":"dsh-session-inject-399eed94-0b26-47ff-820b-53d936e775d7","clientTimeZone":"Asia/Shanghai"}
+  text: "请只回复 SMOKE-OK"
+
+[assistant/message] seq=45 turn=4
+  text: "SMOKE-OK"
+
+[turn/end] seq=47 data={"turn":4,"reason":{"kind":"completed"}}
+
+[turn/start] seq=49 data={"turn":5}
+
+[user/message] seq=52 source={"kind":"user","rpcId":"dsh-session-inject-5db00f9f-6eee-45c2-a6b3-7ec1f3aa961d","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CURL-OK，不要解释。"
+
+[assistant/message] seq=54 turn=5
+  text: "CURL-OK"
+
+[turn/end] seq=56 data={"turn":5,"reason":{"kind":"completed"}}
+
+[turn/start] seq=58 data={"turn":6}
+
+[user/message] seq=61 source={"kind":"user","rpcId":"dsh-session-inject-d8b345ed-173b-4a5d-a8aa-01f730fdb4fa","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 EVID-MWT3PBI0，不要解释。"
+
+[assistant/message] seq=63 turn=6
+  text: "EVID-MWT3PBI0"
+
+[turn/end] seq=65 data={"turn":6,"reason":{"kind":"completed"}}
+
+[turn/start] seq=67 data={"turn":7}
+
+[user/message] seq=70 source={"kind":"user","rpcId":"dsh-session-inject-5ae2cee3-f6ff-4519-a8e7-511ebd1cc33f","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-A，不要解释。"
+
+[assistant/message] seq=72 turn=7
+  text: "CONC-A"
+
+[turn/end] seq=74 data={"turn":7,"reason":{"kind":"completed"}}
+
+[turn/start] seq=76 data={"turn":8}
+
+[user/message] seq=79 source={"kind":"user","rpcId":"dsh-session-inject-06b9ced2-8180-47bf-ab88-b040abcb0728","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-B，不要解释。"
+
+[assistant/message] seq=81 turn=8
+  text: "CONC-B"
+
+[turn/end] seq=83 data={"turn":8,"reason":{"kind":"completed"}}
+
+[turn/start] seq=85 data={"turn":9}
+
+[user/message] seq=88 source={"kind":"user","rpcId":"dsh-session-inject-d4ebf898-fbcf-4ed1-9e2b-fa4fe4b979c9","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CURL-OK，不要解释。"
+
+[assistant/message] seq=90 turn=9
+  text: "CURL-OK"
+
+[turn/end] seq=92 data={"turn":9,"reason":{"kind":"completed"}}
+
+[turn/start] seq=94 data={"turn":10}
+
+[user/message] seq=97 source={"kind":"user","rpcId":"dsh-session-inject-94ce0138-b7c2-488d-b364-8d2129c81442","clientTimeZone":"Asia/Shanghai"}
+  text: "请只回复 SMOKE-OK"
+
+[assistant/message] seq=99 turn=10
+  text: "SMOKE-OK"
+
+[turn/end] seq=101 data={"turn":10,"reason":{"kind":"completed"}}
+
+[turn/start] seq=103 data={"turn":11}
+
+[user/message] seq=106 source={"kind":"user","rpcId":"dsh-session-inject-4471a629-946a-4c21-b6cf-e733125bd3cf","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 EVID-MWT3SPLQ，不要解释。"
+
+[assistant/message] seq=108 turn=11
+  text: "EVID-MWT3SPLQ"
+
+[turn/end] seq=110 data={"turn":11,"reason":{"kind":"completed"}}
+
+[turn/start] seq=112 data={"turn":12}
+
+[user/message] seq=115 source={"kind":"user","rpcId":"dsh-session-inject-488a93cb-318b-4ce3-94d7-7b7c1cdc402c","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-A，不要解释。"
+
+[assistant/message] seq=117 turn=12
+  text: "CONC-A"
+
+[turn/end] seq=119 data={"turn":12,"reason":{"kind":"completed"}}
+
+[turn/start] seq=121 data={"turn":13}
+
+[user/message] seq=124 source={"kind":"user","rpcId":"dsh-session-inject-a3d54cd9-cb69-4949-84cf-ee0a3f8226c1","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CONC-B，不要解释。"
+
+[assistant/message] seq=126 turn=13
+  text: "CONC-B"
+
+[turn/end] seq=128 data={"turn":13,"reason":{"kind":"completed"}}
+
+[turn/start] seq=130 data={"turn":14}
+
+[user/message] seq=133 source={"kind":"user","rpcId":"dsh-session-inject-bf3b7d5b-f447-4784-943a-2c5bcecd508d","clientTimeZone":"Asia/Shanghai"}
+  text: "只回复 CURL-OK，不要解释。"
+
+[assistant/message] seq=135 turn=14
+  text: "CURL-OK"
+
+[turn/end] seq=137 data={"turn":14,"reason":{"kind":"completed"}}
+
+[turn/start] seq=139 data={"turn":15}
+
+[user/message] seq=142 source={"kind":"user","rpcId":"dsh-session-inject-48133687-ace2-46f3-ad5d-73a497972c14","clientTimeZone":"Asia/Shanghai"}
+  text: "请只回复 SMOKE-OK"
+
+[assistant/message] seq=144 turn=15
+  text: "SMOKE-OK"
+
+[turn/end] seq=146 data={"turn":15,"reason":{"kind":"completed"}}
