@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax-check every ES module
+        run: |
+          set -e
+          for f in $(git ls-files '*.mjs' '*.js'); do
+            node --check "$f"
+            echo "ok $f"
+          done
+
+      - name: Validate JSON manifests
+        run: |
+          node -e "for (const f of ['package.json']) { JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('ok', f) }"
+          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('package.json','utf8'));const need=['name','version','type','main','license'];for(const k of need){if(!d[k]){console.error('missing',k);process.exit(1)}}"
+
+      - name: Verify the bundle patch declares the plugin row
+        run: |
+          grep -q "dsh-session-inject" cordis.patch.yml
+          grep -q "port:" cordis.patch.yml
+
+      - name: Verify package ↔ bundle wiring
+        run: |
+          node -e "
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('package.json','utf8'));
+          const patch=d.dsh&&d.dsh.bundle&&d.dsh.bundle.patch;
+          if(!patch) throw new Error('package.json has no dsh.bundle.patch');
+          if(!fs.existsSync(patch)) throw new Error('missing bundle patch: '+patch);
+          const m=d.main||'./index.mjs';
+          if(!fs.existsSync(m)) throw new Error('missing main entry: '+m);
+          console.log('ok: bundle patch', patch, '| main', m);
+          "
