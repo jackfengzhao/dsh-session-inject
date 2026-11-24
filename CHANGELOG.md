@@ -33,7 +33,10 @@ copy of `submission_id`) was lost, and the caller could neither poll nor tell "d
 
 ## [0.2.0] — 2026-11-23
 
-Hardening after the first live acceptance run.
+The first live run showed four concrete defects: `busy` was `true` for every session (it read the
+wrong state field), `session_create` was implemented but never registered in `tools/list`, reply
+extraction could return reasoning text, and every poll re-scanned the entire event log instead of
+continuing from a cursor.
 
 ### Added
 - `session_create` tool (gated by `allowCreate`).

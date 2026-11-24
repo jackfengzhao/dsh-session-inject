@@ -35,6 +35,7 @@ Hermes ──MCP over HTTP (127.0.0.1:3090)──▶ dsh 插件 ──sessionCon
 - [常见问题](#常见问题)
 - [项目结构](#项目结构)
 - [开发与自测](#开发与自测)
+- [版本演进](#版本演进)
 - [文档](#文档)
 - [相关项目](#相关项目)
 - [许可证](#许可证)
@@ -258,6 +259,16 @@ npm run test:progress       # SSE 进度通知
 
 插件本体**无运行时依赖**。
 
+## 版本演进
+
+每一版都是因为上一版在现场出了事。完整记录见 [`CHANGELOG.md`](CHANGELOG.md)，这里只留要点。
+
+| 版本 | 坏在哪，改了什么 |
+|---|---|
+| 0.1.0 | 第一个能用的版本：`sessions_list`、`session_inject`、`inject_status`；`queue` / `steer`；回复锚定在会话自己的 `turn/end` 上。 |
+| 0.2.0 | 首次实跑暴露的问题：`busy` 对所有会话恒为 `true`（取错状态字段，"忙不忙"等于没用）、`session_create` 写了却没注册进工具表、回复抽取会把思考文本当成答案、每次轮询都重扫整份事件日志。四条全部修掉，另加 token 鉴权。 |
+| 0.3.0 | 一次真实事故：`wait_ms=300000` 被客户端 300 秒超时掐断，`submission_id` 唯一的副本也随响应丢了——既没法轮询，也分不清"死了"还是"在想"。现在等待上限 240 秒、每个响应都带 id、`submissions_list` 能找回丢失的 id、`stalled` 把"慢"和"失败"分开、记录落盘重启后变 `orphaned`。 |
+
 ## 文档
 
 | 文档 | 内容 |
@@ -267,7 +278,6 @@ npm run test:progress       # SSE 进度通知
 | [`docs/api-evidence.md`](docs/api-evidence.md) | 插件所依赖的 dsh 源码摘录 |
 | [`docs/REPORT.md`](docs/REPORT.md) | 交付报告：API 调研、验收结果、各版本变更 |
 | [`CHANGELOG.md`](CHANGELOG.md) | 版本记录 |
-| [`docs/history/`](docs/history/) | 构建 v0.2 / v0.3 时的原始任务书 |
 
 ## 相关项目
 

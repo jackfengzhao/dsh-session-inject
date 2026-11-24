@@ -37,6 +37,7 @@ Hermes ──MCP over HTTP (127.0.0.1:3090)──▶ dsh plugin ──sessionCon
 - [Troubleshooting](#troubleshooting)
 - [Project layout](#project-layout)
 - [Development](#development)
+- [Version history](#version-history)
 - [Documentation](#documentation)
 - [Related projects](#related-projects)
 - [License](#license)
@@ -280,6 +281,17 @@ npm run test:progress       # SSE progress notifications
 
 The plugin itself has **no runtime dependencies**.
 
+## Version history
+
+Each version exists because something failed in the field. The full notes are in
+[`CHANGELOG.md`](CHANGELOG.md); this is the short form.
+
+| Version | What was broken, and what changed |
+|---|---|
+| 0.1.0 | First working version: `sessions_list`, `session_inject`, `inject_status`; `queue` / `steer`; the reply anchored on the session's own `turn/end`. |
+| 0.2.0 | From the first live run: `busy` was `true` for every session (wrong state field, so "is it busy" told you nothing), `session_create` existed but was never registered, reply extraction could pick up reasoning text, and every poll re-scanned the whole event log. All four fixed; token auth added. |
+| 0.3.0 | A real failure: `wait_ms=300000` was cut off by the client's 300 s timeout, and the only copy of `submission_id` went with the response — the caller could neither poll nor tell "dead" from "thinking". Waits now cap at 240 s, every response carries the id, `submissions_list` recovers a lost one, `stalled` separates "slow" from "failed", and records persist across restarts as `orphaned`. |
+
 ## Documentation
 
 | Doc | Content |
@@ -289,7 +301,6 @@ The plugin itself has **no runtime dependencies**.
 | [`docs/api-evidence.md`](docs/api-evidence.md) | the dsh source excerpts this plugin builds on |
 | [`docs/REPORT.md`](docs/REPORT.md) | delivery report: API investigation, acceptance results, per-version changes |
 | [`CHANGELOG.md`](CHANGELOG.md) | release notes |
-| [`docs/history/`](docs/history/) | the task briefs used to build v0.2 and v0.3 |
 
 ## Related projects
 

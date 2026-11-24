@@ -6,10 +6,8 @@
 - 交付目录：`C:\Users\<user>\Documents\code\dsh-session-inject\`
 - 运行端点：`http://127.0.0.1:3090/mcp/session-inject`（健康检查 `/health`）
 
-> **发布前脱敏说明**：本报告与 `evidence/` 下的原始输出在公开发布时做了三处替换——
-> 本机用户名 → `<user>`、会话标题 → `<redacted-title>`、镜像会话 id 与模型服务商 →
-> `hermes-<redacted-id>` / `<provider>`。其余字段（状态、耗时、错误码、事件类型、模型名）
-> 保持原始值，可逐条与复跑结果对照。
+> **发布说明**：原始输出文件（`evidence/*.json|txt`）不随仓库发布；报告正文保留了当时的关键数值（耗时、阶段、错误码、事件类型）。脱敏规则：本机用户名 → `<user>`、会话标题 →
+> `<redacted-title>`、镜像会话 id 与模型服务商 → `hermes-<redacted-id>` / `<provider>`。
 
 ## 0. 结论
 
@@ -119,12 +117,12 @@ agent loop 执行（不 spawn 子代理）。
 
 ## 3. 六项验收实测
 
-证据文件均在 `docs/evidence/`。
+原始输出不随仓库发布（41 个抓取文件、130 KB，对读者没有增量信息）；下文括号里的文件名是当时抓取的证据，用 `tools/` 下的脚本可复跑出同样结构。
 
 ### A. `sessions_list` 返回真实活会话（含 `session-3b7b923d-...`）✅
 
 时间：2026-11-23T18:09:02+08（UTC 10:09:02）。证据：
-[`03-sessions-list.json`](evidence/03-sessions-list.json)。
+`03-sessions-list.json`。
 
 ```json
 {"session_id":"session-3b7b923d-6745-481a-8145-9b0b7f699534","title":"<redacted-title>",
@@ -140,8 +138,8 @@ agent loop 执行（不 spawn 子代理）。
 `...\dsh-session-inject\test-workspace`，模型 `<provider>/mimo-v2.6-flash`）。
 
 - 投递 `只回复 EVID-MWT3SPLQ，不要解释。` 于 18:09:03，`status=done`，
-  `turn_end_seq=110`（[`04-inject.json`](evidence/04-inject.json)）。
-- 会话 projcache（[`09-projcache.json`](evidence/09-projcache.json)）：
+  `turn_end_seq=110`（`04-inject.json`）。
+- 会话 projcache（`09-projcache.json`）：
 
 ```json
 "sessionStats": { "turns": 15, "steps": 15, "lastTurn": 15 },
@@ -152,7 +150,7 @@ agent loop 执行（不 spawn 子代理）。
 ```
 
   从空白会话开始，每次投递恰好 `turn/start` +1、`turn/end` +1
-  （[`08-session-events.txt`](evidence/08-session-events.txt) 统计：15 个
+  （`08-session-events.txt` 统计：15 个
   `turn/start`、15 个 `turn/end`、15 条用户锚点消息）；时间线（HUD 同一份
   projcache）可见该条用户消息与回复。
 
@@ -167,7 +165,7 @@ agent loop 执行（不 spawn 子代理）。
 
 ### D. 不存在的 session_id → `E_UNKNOWN_SESSION` 且附活会话列表 ✅
 
-证据：[`06-unknown-session.json`](evidence/06-unknown-session.json)。
+证据：`06-unknown-session.json`。
 
 ```json
 {"code":-32030,
@@ -178,14 +176,14 @@ agent loop 执行（不 spawn 子代理）。
 
 ### E. 并发两次投递同一会话 → 第二个排队，不交叉回合 ✅
 
-证据：[`07-concurrent.json`](evidence/07-concurrent.json)（18:06:28 起，总耗时 3029ms）。
+证据：`07-concurrent.json`（18:06:28 起，总耗时 3029ms）。
 
 | 请求 | 回复 | 耗时 |
 |---|---|---|
 | `只回复 CONC-A` | `CONC-A` | 1331ms |
 | `只回复 CONC-B` | `CONC-B` | 3186ms（排在 A 之后） |
 
-会话日志（[`08-session-events.txt`](evidence/08-session-events.txt)）确认这是两个
+会话日志（`08-session-events.txt`）确认这是两个
 独立回合：
 
 ```
@@ -209,7 +207,7 @@ powershell -File .\examples\hermes-curl.ps1 `
   -Content "只回复 CURL-OK，不要解释。"
 ```
 
-真实输出（原样，[`10-curl-output.txt`](evidence/10-curl-output.txt)）：
+真实输出（原样，`10-curl-output.txt`）：
 
 ```json
 {"jsonrpc":"2.0","id":2,"result":{"content":[{"type":"text","text":"{\n  \"ok\": true,\n  \"session_id\": \"session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344\",\n  \"submission_id\": \"sub-mwt3swa5-ivzg9ook\",\n  \"status\": \"done\",\n  \"reply_text\": \"CURL-OK\",\n  \"turn_end_seq\": 137,\n  \"elapsed_ms\": 1289\n}"}],"metadata":{"ok":true,"session_id":"session-3e2b7ded-74fb-4fea-803d-0cbc0d81e344","submission_id":"sub-mwt3swa5-ivzg9ook","status":"done","reply_text":"CURL-OK","turn_end_seq":137,"elapsed_ms":1289},"isError":false}}
@@ -225,8 +223,8 @@ curl -sS -X POST http://127.0.0.1:3090/mcp/session-inject \
 
 最终 3 工具回归（关闭 `session_create` 测试辅助后）再跑一次
 `tools/smoke.mjs`：`passed=true`，5 项检查全过
-（[`11-final-smoke.json`](evidence/11-final-smoke.json)），
-端点健康快照见 [`12-final-health.json`](evidence/12-final-health.json)。
+（`11-final-smoke.json`），
+端点健康快照见 `12-final-health.json`。
 
 ## 4. 安装与精确 diff
 
@@ -379,7 +377,6 @@ tools/test-progress.mjs       v0.3 MCP progress 验收
 tools/test-ttl.mjs            v0.3 持久化 TTL/压缩单测
 docs/REPORT.md                本报告
 docs/api-evidence.md          API 原文摘录
-docs/evidence/                实测输出
 ```
 
 ## 9. v0.2 修复（2026-11-23 19:23–19:35 +08）
@@ -410,7 +407,7 @@ docs/evidence/                实测输出
   `phase.kind === 'idle' || 'maintenance' ? 'idle' : 'running'`。
 - **改法**：`busy = state.running === true || (state.queue?.length > 0)`，
   不再看 `active`。
-- **证据**：[`2x-busy.json`](evidence/2x-busy.json)（2026-11-23T11:29:48Z）。
+- **证据**：`2x-busy.json`（2026-11-23T11:29:48Z）。
   - 空闲：`session-3b7b923d` `busy=false`、`hermes-<redacted-id>` `false`、
     测试会话 `false`
   - 正在跑（本会话 `session-c8bc66df`）：`busy=true`
@@ -422,10 +419,10 @@ docs/evidence/                实测输出
   `config.allowCreate === true`，两层一起把它藏掉了。
 - **改法**：默认注册为第 4 个工具（`config.allowCreate: false` 可显式关闭），
   dispatcher guard 同步为 `!== false`；描述改为正式的创建语义。
-- **证据**：[`2x-tools-list.json`](evidence/2x-tools-list.json) 列出 4 个工具；
-  [`2x-session-create.json`](evidence/2x-session-create.json) 创建
+- **证据**：`2x-tools-list.json` 列出 4 个工具；
+  `2x-session-create.json` 创建
   `session-fd7a95e8-3bf3-4ad1-a263-517b298856fe`；
-  [`2x-create-inject.json`](evidence/2x-create-inject.json) 对它投递并拿到
+  `2x-create-inject.json` 对它投递并拿到
   `reply_text:"CREATE-OK"`（`turn_end_seq=19`）。
 
 ### 9.3 鉴权
@@ -434,7 +431,7 @@ docs/evidence/                实测输出
   启用或验证（health 一直是 `auth:"open"`）。
 - **改法**：补齐验收，并把比较改为常量时间
   `timingSafeEqual(sha256(actual), sha256(expected))`；文档写明配置方式。
-- **证据**：[`2x-auth.json`](evidence/2x-auth.json)（2026-11-23T11:32:32Z）。
+- **证据**：`2x-auth.json`（2026-11-23T11:32:32Z）。
   临时设 `token: <redacted-test-token>` 后：不带 401、错 token 401、正确 token 200；
   health `auth="bearer-required"`。测试后已移除 token，恢复 `auth="open"`。
 
@@ -443,7 +440,7 @@ docs/evidence/                实测输出
 - **改法**：安装 `@modelcontextprotocol/sdk`（1.32.2），新增
   `tools/mcp-client-check.mjs`，用 `Client` + `StreamableHTTPClientTransport`
   跑完整握手。
-- **证据**：[`2x-mcp-client.json`](evidence/2x-mcp-client.json)：
+- **证据**：`2x-mcp-client.json`：
   `initialize=ok`、`protocolVersion=2024-11-05`、
   `tools=[sessions_list, session_inject, inject_status, session_create]`；
   `sessions_list` / `session_inject` / `inject_status` 均
@@ -460,12 +457,12 @@ docs/evidence/                实测输出
     `status=failed` + `E_INJECT_FAILED` + 结构化 `data.failure` /
     `data.turn_end_reason`（保留 `LlmFailure` 原文）。
 - **证据**：
-  - 只调工具不回复：[`2x-edge-toolonly.json`](evidence/2x-edge-toolonly.json)，
+  - 只调工具不回复：`2x-edge-toolonly.json`，
     `reply_text:""`、`last_event_type:"step/end"`、`assistant_texts:["","","",""]`、
     `turn_end_reason:{kind:"completed"}`；原始日志
-    [`2x-edge-toolonly-events.txt`](evidence/2x-edge-toolonly-events.txt)
+    `2x-edge-toolonly-events.txt`
     （user seq=9 → assistant seq=18/25/32/42 全空 → turn/end seq=44）。
-  - 真实 401 失败：[`2x-edge-401.json`](evidence/2x-edge-401.json)，
+  - 真实 401 失败：`2x-edge-401.json`，
     `status:"failed"`、`error_code:"E_INJECT_FAILED"`、
     `turn_end_reason:{kind:"error",error:{message:"401: ... invalid api key",code:"AUTH"}}`。
     做法：临时在 web profile 加一个 `v02401` provider 指向本地 401 fixture
@@ -481,11 +478,11 @@ docs/evidence/                实测输出
   `perf.scans / perf.scan_ms / perf.scan_ms_avg / perf.events_examined`；
   配置 `legacyScan:true` 可切回 v0.1 全量扫描做 A/B。
 - **证据**（20 轮测试会话 `session-3e2b7ded`）：
-  - v0.1 全量：[`2x-perf-legacy.json`](evidence/2x-perf-legacy.json) —
+  - v0.1 全量：`2x-perf-legacy.json` —
     139 次扫描、4.40ms 总计、0.03ms/次。
-  - v0.2 增量：[`2x-perf-incremental.json`](evidence/2x-perf-incremental.json) —
+  - v0.2 增量：`2x-perf-incremental.json` —
     12 次扫描、0.05ms 总计、≈0.004ms/次（两次模型延迟不同，比较单次扫描耗时）。
-  - 大规模外推：[`2x-perf-synthetic.json`](evidence/2x-perf-synthetic.json)
+  - 大规模外推：`2x-perf-synthetic.json`
     （`snapshotEvents()` 全量复制 vs `snapshotEvents(cursor)`）：
 
     | 事件数 | v0.1 每次 | v0.2 每次 | 倍数 |
@@ -498,8 +495,8 @@ docs/evidence/                实测输出
 
 - **改法**：`steer` 走 `store.runImmediately`，不排进每会话串行队列（否则会被
   降级成普通 queue 回合）。
-- **证据**：[`2x-steer.json`](evidence/2x-steer.json)（checks 全 true）与
-  [`2x-steer-events.txt`](evidence/2x-steer-events.txt)：
+- **证据**：`2x-steer.json`（checks 全 true）与
+  `2x-steer-events.txt`：
   queue 投递在 t+0.75s 返回 `status:"running"`；steer 在 t+2.5s 发出，
   在 turn 2 内部落为 `user/message seq=32`（turn 结束是 seq=36），
   最终回复包含 `STEER-OK`；两个 submission 都归到同一回合（`turn_end_seq=36`）。
@@ -544,7 +541,7 @@ v0.1 目录未纳入 git，无法生成逐行 patch；以下为改动文件与�
   脚本检查 `/health` 版本 ≥0.2.0、MCP initialize、4 个工具、
   `sessions_list`、`session_create → session_inject → inject_status`
   全链路（期望 `DESKTOP-OK`）。该脚本已先在 web 端点跑通：
-  [`2x-verify-desktop-script-on-web.txt`](evidence/2x-verify-desktop-script-on-web.txt)
+  `2x-verify-desktop-script-on-web.txt`
   （4 项 PASS；脚本只用 ASCII，避免 Windows PowerShell 5.1 的编码问题）。
 - 注意：web 与 desktop 同时运行时都要绑 3090，会冲突；先停一个再验证另一个。
 
@@ -564,13 +561,13 @@ v0.3 的结论：等待可以保留，但**状态不能只靠最后一个响应*
 
 | 需求 | 实现 | 证据 |
 |---|---|---|
-| R1 wait 上限/截断 | `maxWaitMs=240000`；超限截断，返回 `ok:true,status:"running",wait_capped,requested_ms,effective_ms,submission_id`，不再返回 `E_TIMEOUT` | [`3x-wait-cap.json`](evidence/3x-wait-cap.json) |
-| R2 `submissions_list` | 新工具，按 `session_id`/`status` 过滤、`limit` 默认 10；返回 R2 全字段 | [`3x-disconnect.json`](evidence/3x-disconnect.json) |
-| R3 `inject_status` 增补 | `phase / queue_position / last_activity_at / idle_ms / steps_seen / reply_preview` | [`3x-orphaned.json`](evidence/3x-orphaned.json) |
-| R4 事件心跳 | `waitForTurn` 的 `onEvent` 把每个新事件写进记录：`last_event_type`、`last_activity_at`（事件 `time`）、`steps_seen`（`step/start` 计数） | [`3x-stall.json`](evidence/3x-stall.json) |
-| R5 持久化 | `<DSH_HOME>/dsh-session-inject/submissions.jsonl` 追加写，启动时按 id 压缩、丢弃 >24h；旧 id 查询返回 `phase:"orphaned"` + 最后状态 | [`3x-orphaned.json`](evidence/3x-orphaned.json) |
-| R6 progress | `_meta.progressToken` + `Accept: text/event-stream` 时，`tools/call` 走 SSE，每 8s 发 `notifications/progress`，最后发结果 | [`3x-progress.json`](evidence/3x-progress.json) |
-| R7 统一契约 | 先 mint 记录再校验：参数错误/未知会话/无活会话/失败回合的 `error.data` 都带 `submission_id` | [`3x-error-contract.json`](evidence/3x-error-contract.json) |
+| R1 wait 上限/截断 | `maxWaitMs=240000`；超限截断，返回 `ok:true,status:"running",wait_capped,requested_ms,effective_ms,submission_id`，不再返回 `E_TIMEOUT` | `3x-wait-cap.json` |
+| R2 `submissions_list` | 新工具，按 `session_id`/`status` 过滤、`limit` 默认 10；返回 R2 全字段 | `3x-disconnect.json` |
+| R3 `inject_status` 增补 | `phase / queue_position / last_activity_at / idle_ms / steps_seen / reply_preview` | `3x-orphaned.json` |
+| R4 事件心跳 | `waitForTurn` 的 `onEvent` 把每个新事件写进记录：`last_event_type`、`last_activity_at`（事件 `time`）、`steps_seen`（`step/start` 计数） | `3x-stall.json` |
+| R5 持久化 | `<DSH_HOME>/dsh-session-inject/submissions.jsonl` 追加写，启动时按 id 压缩、丢弃 >24h；旧 id 查询返回 `phase:"orphaned"` + 最后状态 | `3x-orphaned.json` |
+| R6 progress | `_meta.progressToken` + `Accept: text/event-stream` 时，`tools/call` 走 SSE，每 8s 发 `notifications/progress`，最后发结果 | `3x-progress.json` |
+| R7 统一契约 | 先 mint 记录再校验：参数错误/未知会话/无活会话/失败回合的 `error.data` 都带 `submission_id` | `3x-error-contract.json` |
 | R8 文档 | README 增加长任务调用序列、上限/stall/progress 说明；本章为 REPORT 增量 | 本文件 |
 
 实现要点：
@@ -590,30 +587,30 @@ v0.3 的结论：等待可以保留，但**状态不能只靠最后一个响应*
 
 | 项 | 结果 | 关键数据 | 证据 |
 |---|---|---|---|
-| A `wait_ms=600000` | ✅ 不报错，`running` + 截断 | wall=240080ms，HTTP 200，`wait_capped:true`，`requested_ms:600000`，`effective_ms:240000`，`submission_id:sub-mwt9mwq7-39duat0c`，`phase:stalled`（正在 sleep） | [`3x-wait-cap.json`](evidence/3x-wait-cap.json) |
-| B curl `--max-time 5` 断开后找回 | ✅ | curl exit=28（5009ms，0 bytes）→ `submissions_list(session)` 找到 `sub-mwt9n4cx-hniktu6y`（`running`）→ `inject_status` 到 `done`，`reply_text:"B-DONE"` | [`3x-disconnect.json`](evidence/3x-disconnect.json) |
-| C 150s 无事件 → stalled → done | ✅ | `idle_ms=124191` 时 `phase:"stalled"` 且 `status:"running"`；随后 `done`，`reply_text:"STALL-DONE"` | [`3x-stall.json`](evidence/3x-stall.json) |
-| D 重启后旧 id | ✅ | 插件 reload（新进程，等价于重启加载）后：old done id → `phase:"orphaned"`, `status:"done"`, `reply_preview:"B-DONE"`；old running id → `phase:"orphaned"`, `status:"running"`；`submissions_list` 含 orphaned 行；**不是 unknown** | [`3x-orphaned.json`](evidence/3x-orphaned.json) |
-| E SDK progress ≥2 | ✅ | SDK 1.32.2，收到 **4** 条 `notifications/progress`，调用最终 `done` | [`3x-progress.json`](evidence/3x-progress.json) |
-| F 短任务回归 | ✅ | 不带 `wait_ms`：wall=1571ms，`status:"done"`，`reply_text:"SHORT-OK"`，`wait_capped:false`，`phase:"done"`；`sessions_list`/`session_create` 正常 | [`3x-short.json`](evidence/3x-short.json) |
+| A `wait_ms=600000` | ✅ 不报错，`running` + 截断 | wall=240080ms，HTTP 200，`wait_capped:true`，`requested_ms:600000`，`effective_ms:240000`，`submission_id:sub-mwt9mwq7-39duat0c`，`phase:stalled`（正在 sleep） | `3x-wait-cap.json` |
+| B curl `--max-time 5` 断开后找回 | ✅ | curl exit=28（5009ms，0 bytes）→ `submissions_list(session)` 找到 `sub-mwt9n4cx-hniktu6y`（`running`）→ `inject_status` 到 `done`，`reply_text:"B-DONE"` | `3x-disconnect.json` |
+| C 150s 无事件 → stalled → done | ✅ | `idle_ms=124191` 时 `phase:"stalled"` 且 `status:"running"`；随后 `done`，`reply_text:"STALL-DONE"` | `3x-stall.json` |
+| D 重启后旧 id | ✅ | 插件 reload（新进程，等价于重启加载）后：old done id → `phase:"orphaned"`, `status:"done"`, `reply_preview:"B-DONE"`；old running id → `phase:"orphaned"`, `status:"running"`；`submissions_list` 含 orphaned 行；**不是 unknown** | `3x-orphaned.json` |
+| E SDK progress ≥2 | ✅ | SDK 1.32.2，收到 **4** 条 `notifications/progress`，调用最终 `done` | `3x-progress.json` |
+| F 短任务回归 | ✅ | 不带 `wait_ms`：wall=1571ms，`status:"done"`，`reply_text:"SHORT-OK"`，`wait_capped:false`，`phase:"done"`；`sessions_list`/`session_create` 正常 | `3x-short.json` |
 
 补充证据：
 
 - 截断返回后任务仍在会话里跑完：session A 的事件日志出现
   `assistant/message seq=25 "CAP-DONE"`、`turn/end seq=27`
-  （[`3x-wait-cap-events.txt`](evidence/3x-wait-cap-events.txt)）。
+  （`3x-wait-cap-events.txt`）。
 - `E_UNKNOWN_SESSION` 也带 `submission_id`：
-  [`3x-error-contract.json`](evidence/3x-error-contract.json)
+  `3x-error-contract.json`
   （`sub-mwt9trmk-jqkk8uxz`）。
 - 最终健康快照（含 `store.persist_path / stall_ms / max_wait_ms`）：
-  [`3x-final-health.json`](evidence/3x-final-health.json)。
+  `3x-final-health.json`。
 - 更新后的 `tools/verify-desktop.ps1` 已在 web 端点整链跑通（5 工具、
-  submissions_list、phase=done）：[`3x-verify-desktop-script-on-web.txt`](evidence/3x-verify-desktop-script-on-web.txt)。
+  submissions_list、phase=done）：`3x-verify-desktop-script-on-web.txt`。
 - 官方 SDK 在 v0.3 最终代码上再跑一遍完整握手（5 工具、`content[].type="text"`、
-  `isError=false`、`phase:"done"`）：[`3x-mcp-client.json`](evidence/3x-mcp-client.json)。
+  `isError=false`、`phase:"done"`）：`3x-mcp-client.json`。
 - R5 的 TTL/压缩单元验证（临时文件，不碰线上记录）：old 记录被丢弃、
   fresh 记录保留、同 id 取最新、文件被压缩、加载后标记 orphaned：
-  [`3x-ttl.json`](evidence/3x-ttl.json)。
+  `3x-ttl.json`。
 
 ### 10.4 已知边界
 
@@ -646,7 +643,7 @@ v0.2 目录未纳入 git，以下为文件行数与改动点：
 | `tools/test-progress.mjs` | 82 | E 验收 |
 | `tools/test-ttl.mjs` | 39 | R5 TTL/压缩单测 |
 | `tools/verify-desktop.ps1` | 117 | 5 工具 + submissions_list + phase 检查 |
-| `docs/evidence/3x-*` | 新增 | 本次全部证据 |
+| （本次抓取的原始输出） | 41 个文件 | 不随仓库发布，见文首说明 |
 
 ### 10.6 desktop
 
