@@ -195,9 +195,9 @@ agent loop 执行（不 spawn 子代理）。
 
 ### F. Hermes 侧 curl 示例 + 真实输出 ✅
 
-脚本：[`examples/hermes-curl.ps1`](examples/hermes-curl.ps1)（Windows，UTF-8 payload 文件
+脚本：[`examples/hermes-curl.ps1`](../examples/hermes-curl.ps1)（Windows，UTF-8 payload 文件
 避免 PowerShell 5.1 的 ISO-8859-1 编码问题）；另附
-[`examples/hermes-curl.sh`](examples/hermes-curl.sh)。
+[`examples/hermes-curl.sh`](../examples/hermes-curl.sh)。
 
 实际执行：
 
